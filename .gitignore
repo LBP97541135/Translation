@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+.env
+backend.log
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+frontend_flutter/build/
+frontend_flutter/.dart_tool/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Config
+config.json
