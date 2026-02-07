@@ -22,9 +22,18 @@ fi
 python3 main.py > backend.log 2>&1 &
 BACKEND_PID=$!
 
-# 等待后端启动完成
-sleep 2
-echo -e "后端服务已在后台运行 (PID: $BACKEND_PID)，日志请查看 backend.log"
+# 等待后端启动完成 (增加等待时间确保服务可用)
+echo -n "正在等待后端就绪..."
+for i in {1..10}; do
+    if curl -s http://127.0.0.1:8000/health > /dev/null; then
+        echo -e "${GREEN} 就绪!${NC}"
+        break
+    fi
+    echo -n "."
+    sleep 1
+done
+
+echo -e "后端服务已在后台运行 (PID: $BACKEND_PID)"
 
 # 2. 启动前端
 echo -e "${GREEN}[2/2] 正在启动 Flutter 前端 (Chrome 浏览器端)...${NC}"

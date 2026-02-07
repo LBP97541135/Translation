@@ -89,6 +89,10 @@ async def get_translation_from_model(text: str) -> dict:
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
 # --- 接口实现 ---
 @app.post("/translate", response_model=TranslateResponse)
 async def translate(request: TranslateRequest):
@@ -103,4 +107,5 @@ async def translate(request: TranslateRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # 修改为 127.0.0.1 强制使用 IPv4，避免 localhost 解析歧义
+    uvicorn.run(app, host="127.0.0.1", port=8000)
