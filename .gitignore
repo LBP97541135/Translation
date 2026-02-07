@@ -23,4 +23,4 @@ frontend_flutter/.dart_tool/
 *.swo
 
 # Config
-config.json
+# config.json (Removed from ignore as requested)
